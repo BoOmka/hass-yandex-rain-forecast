@@ -61,7 +61,7 @@ class YandexRainSensor(Entity):
 
     async def async_update(self):
         _LOGGER.debug(f'Updating sensor {self._name}...')
-        if (time.monotonic() - self._update_ts) >= self._scan_interval:
+        if (time.monotonic() - self._update_ts) >= self._scan_interval.total_seconds():
             try:
                 url = BASE_URL.format(lat=self._lat, lon=self._lon)
                 async with aiohttp.ClientSession() as client:
