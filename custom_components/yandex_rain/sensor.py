@@ -55,7 +55,7 @@ class YandexRainSensor(Entity):
         self.attr = {
             ATTR_RAIN_STATE_LIST: RAIN_STATES
         }
-        self._update_ts = time.monotonic()
+        self._update_ts = 0
         _LOGGER.debug(f'Initialized sensor {self._name}')
 
     async def async_update(self):
