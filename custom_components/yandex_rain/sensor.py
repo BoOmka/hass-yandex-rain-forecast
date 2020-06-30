@@ -40,8 +40,9 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     name = config[CONF_NAME]
     lat = config.get(CONF_LATITUDE, hass.config.latitude)
     lon = config.get(CONF_LONGITUDE, hass.config.longitude)
+    scan_interval = config.get(CONF_SCAN_INTERVAL)
 
-    async_add_entities([YandexRainSensor(hass, name, lat, lon)], True)
+    async_add_entities([YandexRainSensor(hass, name, lat, lon, scan_interval)], True)
 
 
 class YandexRainSensor(Entity):
