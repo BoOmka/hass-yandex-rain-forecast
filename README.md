@@ -26,7 +26,7 @@ key | type | description
 
 ```yaml
 sensor:
-  platform: yandex_maps
+  platform: yandex_rain
   name: rain_info
   latitude: 12.34
   longitude: 23.45
