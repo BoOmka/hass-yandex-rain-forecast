@@ -1,0 +1,6 @@
+{
+  "name": "Yandex Rain Sensor",
+  "country": ["RU", "BY", "UA"],
+  "render_readme": true,
+  "homeassistant": "0.96.0"
+}

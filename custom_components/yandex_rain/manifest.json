@@ -1,0 +1,9 @@
+{
+  "domain": "yandex_rain",
+  "name": "Yandex Rain",
+  "documentation": "https://github.com/BoOmka/hass_yandex_rain_sensor",
+  "dependencies": [],
+  "codeowners": ["BoOmka"],
+  "requirements": []
+}
+
