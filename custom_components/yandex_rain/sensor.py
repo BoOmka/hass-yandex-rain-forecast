@@ -25,15 +25,18 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_SCAN_INTERVAL, default=300): cv.time_period,
 })
 
+ICON = 'mdi:weather-pouring'
+
 BASE_URL = 'https://yandex.ru/pogoda/front/maps/nowcast-single?lat={lat}&lon={lon}&lang=ru&alert=1'
 
 SUPPORTED_ALERT_TYPES = {'rain', 'noprec'}
 
 ATTR_LAST_UPDATE = 'last_update'
-ATTR_RAIN_STATE = 'rain_state'
-ATTR_RAIN_STATE_LIST = 'rain_state_list'
+ATTR_PREC_STATE = 'prec_state'
+ATTR_PREC_STATE_LIST = 'prec_state_list'
+ATTR_PREC_TYPE = 'prec_type'
 
-RAIN_STATES = ['starts', 'ends', 'noprec', 'still']
+PREC_STATES = ['begins', 'ends', 'noprec', 'still']
 
 
 async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
@@ -54,7 +57,7 @@ class YandexRainSensor(Entity):
         self._lon = lon
         self._scan_interval = scan_interval
         self.attr = {
-            ATTR_RAIN_STATE_LIST: RAIN_STATES
+            ATTR_PREC_STATE_LIST: PREC_STATES
         }
         self._update_ts = 0
         _LOGGER.debug(f'Initialized sensor {self._name}')
@@ -75,8 +78,8 @@ class YandexRainSensor(Entity):
                             return
 
                         self._state = alert.get('title', None)
-
-                        self.attr[ATTR_RAIN_STATE] = alert.get('state', None)
+                        self.attr[ATTR_PREC_STATE] = alert.get('state')
+                        self.attr[ATTR_PREC_TYPE] = alert.get('type')
                         updated_ts = alert.get('time')
                         if updated_ts is not None:
                             self.attr[ATTR_LAST_UPDATE] = datetime.datetime.fromtimestamp(updated_ts)
@@ -95,7 +98,7 @@ class YandexRainSensor(Entity):
 
     @property
     def icon(self):
-        return 'mdi:weather-pouring'
+        return ICON
 
     @property
     def device_state_attributes(self):
