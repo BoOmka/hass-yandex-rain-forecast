@@ -36,7 +36,7 @@ ATTR_PREC_STATE = 'prec_state'
 ATTR_PREC_STATE_LIST = 'prec_state_list'
 ATTR_PREC_TYPE = 'prec_type'
 
-PREC_STATES = ['begins', 'ends', 'noprec', 'still']
+SUPPORTED_PREC_STATES = ['begins', 'ends', 'noprec', 'still', 'norule']
 
 
 async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
@@ -57,7 +57,7 @@ class YandexRainSensor(Entity):
         self._lon = lon
         self._scan_interval = scan_interval
         self.attr = {
-            ATTR_PREC_STATE_LIST: PREC_STATES
+            ATTR_PREC_STATE_LIST: SUPPORTED_PREC_STATES
         }
         self._update_ts = 0
         _LOGGER.debug(f'Initialized sensor {self._name}')
