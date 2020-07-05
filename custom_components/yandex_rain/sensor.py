@@ -80,9 +80,7 @@ class YandexRainSensor(Entity):
                         self._state = alert.get('title', None)
                         self.attr[ATTR_PREC_STATE] = alert.get('state')
                         self.attr[ATTR_PREC_TYPE] = alert.get('type')
-                        updated_ts = alert.get('time')
-                        if updated_ts is not None:
-                            self.attr[ATTR_LAST_UPDATE] = datetime.datetime.fromtimestamp(updated_ts)
+                        self.attr[ATTR_LAST_UPDATE] = str(datetime.datetime.now())
             except Exception as ex:
                 _LOGGER.error(f'Could not update {self._name}: {ex}')
         else:
