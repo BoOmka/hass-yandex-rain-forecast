@@ -27,7 +27,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 
 ICON = 'mdi:weather-pouring'
 
-BASE_URL = 'https://yandex.ru/pogoda/front/maps/nowcast-single?lat={lat}&lon={lon}&lang=ru&alert=1'
+BASE_URL = 'https://yandex.ru/pogoda/front/maps/prec-alert?lat={lat}&lon={lon}&lang=ru'
 
 SUPPORTED_ALERT_TYPES = {'rain', 'noprec'}
 
